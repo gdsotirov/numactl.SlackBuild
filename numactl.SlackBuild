@@ -23,7 +23,7 @@
 . ../../slack-package.conf
 
 NAME=numactl
-VERSION=2.0.14
+VERSION=2.0.15
 ARCH=${ARCH:-i586}
 BUILD=${BUILD:-1}
 
@@ -55,6 +55,9 @@ cd $SRC
 fix_source
 
 # Configure
+if [ ! -f configure ]; then
+  autoreconf --force --install --verbose || exit 41
+fi
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 ./configure --build=${ARCH}-slackware-linux \
@@ -69,7 +72,7 @@ CXXFLAGS="$SLKCFLAGS" \
             --enable-static=no || exit 4
 
 # Build & install
-make --jobs 4 || exit 5
+make --jobs || exit 5
 make DESTDIR=$PKG install || exit 6
 
 # Prepare the package
