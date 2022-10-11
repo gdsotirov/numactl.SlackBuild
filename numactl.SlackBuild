@@ -23,7 +23,7 @@
 . ../../slack-package.conf
 
 NAME=numactl
-VERSION=2.0.15
+VERSION=2.0.16
 ARCH=${ARCH:-i586}
 BUILD=${BUILD:-1}
 
