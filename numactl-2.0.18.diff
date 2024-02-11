@@ -1,0 +1,19 @@
+# Fix compilation errors
+# See https://github.com/numactl/numactl/issues/214
+diff -urNad numactl-2.0.18-new/syscall.c numactl-2.0.18/syscall.c
+--- numactl-2.0.18-new/syscall.c	2024-02-07 09:23:10.000000000 +0200
++++ numactl-2.0.18/syscall.c	2024-02-11 16:13:57.889374547 +0200
+@@ -140,13 +140,7 @@
+ #endif
+ 
+ #if !defined(__NR_set_mempolicy_home_node)
+-
+-#if defined(__x86_64__) || defined(__aarch64__)
+ #define __NR_set_mempolicy_home_node 450
+-#else
+-#error "Add syscalls for your architecture or update kernel headers"
+-#endif
+-
+ #endif
+ 
+ #ifndef __GLIBC_PREREQ
